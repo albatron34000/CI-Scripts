@@ -1,36 +1,27 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Device
-export SHRP_BRANCH="shrp_12.1"
-export DT_LINK="https://github.com/Nico170420/android_device_samsung_z3s.git -b shrp"
+# Define Variables
+DEVICE="z3s"
+DT="https://github.com/Nico170420/android_device_samsung_z3s.git"
+OEM="samsung"
+TW_BRANCH="12.1"
+TARGET=(
+	recoveryimage
+)
 
-export DEVICE="z3s"
-export OEM="samsung"
+repo init --depth=1 -u https://github.com/SHRP/manifest.git  -b shrp-${TW_BRANCH}
+repo sync -j10 --force-sync --no-clone-bundle --no-tags
+repo sync --force-sync
 
-# Build Target
-## "recoveryimage" - for A-Only Devices without using Vendor Boot
-## "bootimage" - for A/B devices without recovery partition (and without vendor boot)
-## "vendorbootimage" - for devices Using vendor boot for the recovery ramdisk (Usually for devices shipped with Android 12 or higher)
-export TARGET="recoveryimage"
+git clone ${DT} -b shrp device/${OEM}/${DEVICE}
 
-export OUTPUT="SHRP*.zip"
+. build/envsetup.sh
+export ALLOW_MISSING_DEPENDENCIES=true
+lunch twrp_${DEVICE}-eng
+mka -j$(nproc) ${TARGET}
 
-# Additional Dependencies (eg: Kernel Source)
-# Format: "repo dest"
-#DEPS=(
-#    "https://github.com/OrangeFoxRecovery/Avatar.git misc"
-#)
+cd ${OUT}
 
-# Extra Command
-export EXTRA_CMD="export OF_MAINTAINER=Nico170420"
+curl -sL https://git.io/file-transfer | sh
+./transfer wet SHRP*.zip
 
-# Magisk
-## Use the Latest Release of Magisk for the OrangeFox addon
-export OF_USE_LATEST_MAGISK=false
-
-# Not Recommended to Change
-export SYNC_PATH="$HOME/work" # Full (absolute) path.
-export USE_CCACHE=1
-export CCACHE_SIZE="50G"
-export CCACHE_DIR="$HOME/work/.ccache"
-export J_VAL=16
