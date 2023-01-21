@@ -10,7 +10,7 @@ TARGET=(
 )
 
 repo init --depth=1 -u https://github.com/SHRP/manifest.git  -b shrp-${TW_BRANCH}
-repo sync -j10 --force-sync --no-clone-bundle --no-tags
+repo sync -j$(nproc) --force-sync --no-clone-bundle --no-tags
 repo sync --force-sync
 
 git clone ${DT} -b shrp device/${OEM}/${DEVICE}
