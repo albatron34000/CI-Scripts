@@ -12,7 +12,7 @@ fi
 
 file_content_type="application/octet-stream"
 files_to_upload=(
-  # relative paths of assets to upload
+  out/target/product/z3s/SHRP*.zip
 )
 
 for fpath in $files_to_upload
