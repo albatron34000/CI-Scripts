@@ -13,8 +13,3 @@ TARGET=(
 export ALLOW_MISSING_DEPENDENCIES=true
 lunch twrp_${DEVICE}-eng
 mka -j$(nproc) ${TARGET}
-
-cd ${OUT}
-
-curl -sL https://git.io/file-transfer | sh
-./transfer wet SHRP*.zip
