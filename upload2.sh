@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-if [[ "$CIRRUS_RELEASE" == "" ]]; then
-  echo "Not a release. No need to deploy!"
-  exit 0
-fi
+#if [[ "$CIRRUS_RELEASE" == "" ]]; then
+#  echo "Not a release. No need to deploy!"
+#  exit 0
+#fi
 
 if [[ "$GITHUB_TOKEN" == "" ]]; then
   echo "Please provide GitHub access token via GITHUB_TOKEN environment variable!"
   exit 1
 fi
 
-file_content_type="application/octet-stream"
+file_content_type="recovery"
 files_to_upload=(
-  out/target/product/z3s/SHRP*.zip
+/tmp/cirrus-ci-build/out/target/product/z3s/SHRP*.ziip
 )
 
 for fpath in $files_to_upload
