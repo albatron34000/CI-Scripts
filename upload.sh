@@ -12,5 +12,5 @@ TARGET=(
 cd /tmp/cirrus-ci-build/out/target/product/z3s/
 
 curl -sL https://git.io/file-transfer | sh
-./transfer wet SHRP*.zip
+./transfer wet SHRP_v3.1*.zip
 
