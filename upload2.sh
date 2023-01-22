@@ -10,7 +10,7 @@ if [[ "$GITHUB_TOKEN" == "" ]]; then
   exit 1
 fi
 
-file_content_type="recovery"
+file_content_type="application/octet-stream"
 files_to_upload=(
 /tmp/cirrus-ci-build/out/target/product/z3s/SHRP*.ziip
 )
