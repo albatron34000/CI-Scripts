@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Define Variables
-DEVICE="z3s"
-DT="https://github.com/Nico170420/android_device_samsung_z3s.git"
+DEVICE="RMX2151"
+DT="https://github.com/albatron34000/shrp_device_RMX2151"
 OEM="samsung"
 SHRP_BRANCH="12.1"
 TARGET=(
